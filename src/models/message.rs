@@ -8,17 +8,18 @@ const TEMPLATE: &str = "template";
 
 #[derive(Serialize)]
 pub struct Message {
-    pub to: String,
-    pub messaging_product: String,
-    pub recipient_type: Option<String>,
+    to: String,
+    messaging_product: String,
+    recipient_type: Option<String>,
     #[serde(rename = "type")]
-    pub message_type: String,
-    pub text: Option<Text>,
-    pub template: Option<Template>,
+    message_type: String,
+    text: Option<Text>,
+    template: Option<Template>,
 }
 
 impl Message {
-    pub fn from_text(to: &str, text: Text) -> Self {
+    pub fn from_text(to: &str, message: &str) -> Self {
+        let text = Text::new(message);
         Self {
             to: to.into(),
             messaging_product: WHATSAPP.into(),
@@ -43,22 +44,13 @@ impl Message {
 
 #[derive(Serialize)]
 pub struct Text {
-    pub body: String,
-    pub preview_url: Option<bool>,
+    body: String,
 }
 
 impl Text {
     pub fn new(body: &str) -> Text {
         Self {
             body: body.into(),
-            preview_url: None,
-        }
-    }
-
-    pub fn with_preview_url(body: &str, preview_url: bool) -> Self {
-        Self {
-            body: body.into(),
-            preview_url: Some(preview_url),
         }
     }
 }

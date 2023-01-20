@@ -4,9 +4,9 @@ use super::component::Component;
 
 #[derive(Serialize)]
 pub struct Template {
-    pub name: String,
-    pub language: Language,
-    pub components: Option<Vec<Component>>,
+    name: String,
+    language: Language,
+    components: Option<Vec<Component>>,
 }
 
 impl Template {
@@ -31,7 +31,7 @@ impl Template {
 
 #[derive(Serialize)]
 pub struct Language {
-    pub code: String,
+    code: String,
 }
 
 impl Language {

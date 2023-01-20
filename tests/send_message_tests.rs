@@ -1,5 +1,5 @@
 use whatsapp_cloud_api::{
-    models::{Component, Message, Parameter, Template, Text},
+    models::{Component, Message, Parameter, Template},
     WhatasppClient, WhatsappError,
 };
 
@@ -10,8 +10,7 @@ async fn send_text_message_works() -> Result<(), WhatsappError> {
         .expect("Missing environment variable WHATSAPP_ACCESS_TOKEN");
     let to =
         std::env::var("WHATSAPP_SEND_TO").expect("Missing environment variable WHATSAPP_SEND_TO");
-    let text = Text::new("test message");
-    let message = Message::from_text(&to, text);
+    let message = Message::from_text(&to, "test message");
     let client = WhatasppClient::new(&access_token);
     let response = client.send_message(&message).await?;
     assert_eq!(response.messages.len(), 1);
