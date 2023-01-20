@@ -1,18 +1,18 @@
-use serde::{Deserialize, Serialize};
+use serde::Deserialize;
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct MessageResponse {
     pub contacts: Vec<ContactResponse>,
     pub messages: Vec<CreatedMessage>,
     pub messaging_product: String,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct CreatedMessage {
     pub id: String,
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Debug, Deserialize)]
 pub struct ContactResponse {
     pub input: String,
     pub wa_id: String,

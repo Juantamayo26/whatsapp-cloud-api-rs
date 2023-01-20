@@ -1,10 +1,8 @@
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 
 use super::component::Component;
 
-const DETERMINISTIC: &str = "deterministic";
-
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Serialize)]
 pub struct Template {
     pub name: String,
     pub language: Language,
@@ -31,16 +29,14 @@ impl Template {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Serialize)]
 pub struct Language {
-    pub policy: String,
     pub code: String,
 }
 
 impl Language {
     pub fn new(code: &str) -> Language {
         Self {
-            policy: DETERMINISTIC.into(),
             code: code.into(),
         }
     }

@@ -3,7 +3,7 @@ use crate::{
     WhatsappError,
 };
 
-const WHATSAPP_API_URL: &str = "https://graph.facebook.com/v13.0/105940028793862/messages";
+const WHATSAPP_API_URL: &str = "https://graph.facebook.com/v15.0/102083622528971/messages";
 
 pub struct WhatasppClient {
     access_token: String,
@@ -23,14 +23,12 @@ impl WhatasppClient {
 
 mod http_client {
     use reqwest::StatusCode;
-    use serde::{de::DeserializeOwned, Serialize};
+    use crate::{
+        models::{Message, MessageResponse},
+        WhatsappError,
+    };
 
-    use crate::WhatsappError;
-
-    pub async fn post<T, U>(url: &str, bearer_token: &str, data: &T) -> Result<U, WhatsappError>
-    where
-        T: Serialize + ?Sized,
-        U: DeserializeOwned,
+    pub async fn post(url: &str, bearer_token: &str, data: &Message) -> Result<MessageResponse, WhatsappError>
     {
         let client = reqwest::Client::new();
         let resp = client
@@ -42,7 +40,7 @@ mod http_client {
 
         match resp.status() {
             StatusCode::OK | StatusCode::CREATED => {
-                let json = resp.json::<U>().await?;
+                let json = resp.json::<MessageResponse>().await?;
                 Ok(json)
             }
             _ => {

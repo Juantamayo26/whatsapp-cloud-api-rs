@@ -1,4 +1,4 @@
-use serde::{Deserialize, Serialize};
+use serde::Serialize;
 
 use super::Template;
 
@@ -6,7 +6,7 @@ const WHATSAPP: &str = "whatsapp";
 const TEXT: &str = "text";
 const TEMPLATE: &str = "template";
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Serialize)]
 pub struct Message {
     pub to: String,
     pub messaging_product: String,
@@ -41,7 +41,7 @@ impl Message {
     }
 }
 
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Serialize)]
 pub struct Text {
     pub body: String,
     pub preview_url: Option<bool>,
