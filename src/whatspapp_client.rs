@@ -7,6 +7,7 @@ fn get_whatsapp_api_url(phone_number_id: &str) -> String {
     format!("https://graph.facebook.com/v15.0/{}/messages", phone_number_id)
 }
 
+#[derive(Clone)]
 pub struct WhatasppClient {
     access_token: String,
     phone_number_id: String
